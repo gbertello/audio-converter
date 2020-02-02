@@ -1,5 +1,5 @@
 import os
-from file import *
+from .file import File, FileDSStore, FileFLAC
 
 
 class App:
