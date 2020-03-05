@@ -3,6 +3,7 @@
 from app.app import App
 
 
-ORIGIN_PATH = "to convert/"
-DESTINATION_PATH = "converted/"
-App(ORIGIN_PATH, DESTINATION_PATH).main()
+ORIGIN_PATH = "/Users/gbertello/Desktop/Musique de Pierre/"
+DESTINATION_PATH = "/Users/gbertello/Desktop/Musique de Pierre (converted)/"
+RULES_PATH = "/Users/gbertello/Programmes/audio-converter/rules.json"
+App(ORIGIN_PATH, DESTINATION_PATH, RULES_PATH).main()

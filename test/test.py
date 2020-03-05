@@ -12,6 +12,7 @@ class Test:
   data_path = 'test/data/music'
   origin_path = 'test/to convert/music/'
   destination_path = 'test/converted/music'
+  rules_path = 'test/rules.json'
 
   def test_can_convert_audio_files(self):
     self.clean_test_directory()
@@ -30,8 +31,8 @@ class Test:
     shutil.copytree(self.data_path, self.origin_path)
 
   def run_main_program(self):
-    App(self.origin_path, self.destination_path).main()
+    App(self.origin_path, self.destination_path, self.rules_path).main()
 
   def check_created_files(self):
-    assert len(os.listdir(self.destination_path)) == 8
+    assert len(os.listdir(self.destination_path)) == 2
     

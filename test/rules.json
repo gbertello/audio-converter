@@ -1,0 +1,11 @@
+{
+  "jpg": "COPY",
+  "ape": "COPY",
+  "cue": "COPY",
+  "log": "COPY",
+  "txt": "COPY",
+  "flac": "LOSSLESS",
+  "wav": "LOSSLESS",
+  "ds_store": "DELETE",
+  "NONE": "MOVE"  
+}

@@ -1,23 +1,36 @@
+import json
 import os
-from .file import File, FileDSStore, FileFLAC
+from .file import FileDelete, FileLossless, FileMP3, FileCopy
 
 
 class App:
-  def __init__(self, origin_path="", destination_path=""):
+  def __init__(self, origin_path="", destination_path="", rules_path=""):
     self.origin_path = origin_path
     self.destination_path = destination_path
+    self.rules_path = rules_path
+    self.rules = json.load(open(self.rules_path, 'r'))
 
   def main(self):
     for filename in self.get_filenames():
       extension = self.get_extension(filename)
-      if extension in ["jpg", "ape", "cue", "log", "txt", "wav"] or extension == os.path.basename(filename):
-        f = File(filename, self.origin_path, self.destination_path)
-      elif extension == "flac":
-        f = FileFLAC(filename, self.origin_path, self.destination_path)
-      elif extension == "DS_Store":
-        f = FileDSStore(filename, self.origin_path, self.destination_path)
+      if extension == filename:
+        if "NONE" not in self.rules.keys():
+          raise Exception("Define default behavior")
+        action = self.rules["NONE"].lower()
       else:
-        raise Exception("Unknown extension %s" % extension)
+        if extension.lower() not in self.rules.keys():
+          raise Exception("Unknown extension %s" % extension)
+        action = self.rules[extension.lower()].lower()
+      if action == "copy":
+        f = FileCopy(filename, self.origin_path, self.destination_path)
+      elif action == "lossless":
+        f = FileLossless(filename, self.origin_path, self.destination_path)
+      elif action == "delete":
+        f = FileDelete(filename, self.origin_path, self.destination_path)
+      elif action == "mp3":
+        f = FileMP3(filename, self.origin_path, self.destination_path)
+      else:
+        raise Exception("Unknown action %s" % action)
       f.process()
   
     for dirname in self.get_dirnames():

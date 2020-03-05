@@ -1,0 +1,11 @@
+{
+  "jpg": "DELETE",
+  "ape": "DELETE",
+  "cue": "DELETE",
+  "log": "DELETE",
+  "txt": "DELETE",
+  "flac": "MP3",
+  "wav": "MP3",
+  "ds_store": "DELETE",
+  "NONE": "DELETE"  
+}
